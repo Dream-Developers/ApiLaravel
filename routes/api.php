@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Http\Request;
 
 /*
@@ -12,6 +13,13 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get("/usuarios",function (){
+
+    $usuarios = User::all();
+    return response()->json(["usuarios"=>$usuarios]);
+})->middleware("verificar:api");
+
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');
