@@ -24,8 +24,14 @@ class ServiciosController extends Controller
             Servicio::create($file);
 
             }
+//Jennifer
+    public function Recuperar(){
+        $servicios = Servicio::all();
+        return response()->json($servicios);
 
+    }
 
+//
         /*$this->validate($request, [
 
             'nombre' => 'required|string',
