@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -9,38 +10,41 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-public function signup(Request $request){
-    
-     $request->validate([
-            'name'     => 'required|string',
-            'lasname'     => 'required|string',
-            'telefono'     => 'required|string',
-            'email'    => 'required|string|email|unique:users',
+    public function signup(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required|string',
+            'lasname' => 'required|string',
+            'telefono' => 'required|string',
+            'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed',
         ]);
         $user = new User([
-            'name'     => $request->name,
-            'lasname'     => $request->lasname,
-            'telefono'     => $request->telefono,
-            'email'    => $request->email,
+            'name' => $request->name,
+            'lasname' => $request->lasname,
+            'telefono' => $request->telefono,
+            'email' => $request->email,
             'password' => bcrypt($request->password),
+            "rol_id"=>2
         ]);
+
         $user->save();
         return response()->json([
             'message' => 'Successfully created user!'], 201);
-}
-    
+    }
+
     public function login(Request $request)
     {
         $request->validate([
-            'email'       => 'required|string|email',
-            'password'    => 'required|string',
+            'email' => 'required|string|email',
+            'password' => 'required|string',
             'remember_me' => 'boolean',
         ]);
         $credentials = request(['email', 'password']);
         if (!Auth::attempt($credentials)) {
             return response()->json([
-                'message' => 'Unauthorized'], 401);
+                'message' => 'No existe este usuario'], 401);
         }
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
@@ -51,17 +55,18 @@ public function signup(Request $request){
         $token->save();
         return response()->json([
             'access_token' => $tokenResult->accessToken,
-            'token_type'   => 'Bearer',
-            'expires_at'   => Carbon::parse(
+            'token_type' => 'Bearer',
+            'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at)
-                    ->toDateTimeString(),
+                ->toDateTimeString(),
+            "rol_id"=>$user->rol_id
         ]);
     }
 
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
-        return response()->json(['message' => 
+        return response()->json(['message' =>
             'Successfully logged out']);
     }
 
@@ -71,5 +76,4 @@ public function signup(Request $request){
     }
 
 
-    
 }

@@ -16,3 +16,7 @@ Route::get('/', function () {
   Route::Post('api/Contenido','servicioController@store');
 Route::get('api/todo','servicioController@index');
 Route::get('api/v1/todo','Mostrar_Usuario@todo');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
