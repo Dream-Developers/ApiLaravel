@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Servicio extends Model
+class servicio extends Model
 {
     Protected $fillable=[
         'nombre', 'descripcion','imagen'
