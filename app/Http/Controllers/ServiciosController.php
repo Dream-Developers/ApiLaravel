@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Servicios;
+use App\Servicio;
 use Illuminate\Http\Request;
 
 class ServiciosController extends Controller
@@ -11,18 +11,18 @@ class ServiciosController extends Controller
     {
         $this->validate($request, [
 
-            'Nombre' => 'required|string',
-            'Descripcion' => 'required|string',
-            'Imagen' => 'required|string',
+            'nombre' => 'required|string',
+            'descripcion' => 'required|string',
+            'imagen' => 'required|string',
 
         ]);
 
 
-        $Servicios = new Servicios([
+        $Servicios = new Servicio([
 
-            'Nombre' => $request->Nombre,
-            'Descripcion' => $request->Descripcion,
-            'Imagen' => $request->Imagen,
+            'nombre' => $request->Nombre,
+            'descripcion' => $request->Descripcion,
+            'imagen' => $request->Imagen,
 
         ]);
 

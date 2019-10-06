@@ -20,3 +20,4 @@ Route::get('api/v1/todo','Mostrar_Usuario@todo');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

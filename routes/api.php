@@ -25,7 +25,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');
     Route::post('signup', 'AuthController@signup');
 
-    Route::post('servicio','ServiciosController@servicio');
+
     
     
   
@@ -38,5 +38,6 @@ Route::group(['prefix' => 'auth'], function () {
 Route::post('/prueba' ,'PruebaController@prueba');
 
 Route::post('api/Contenido','servicioController@store');
+Route::post('servicio','ServiciosController@servicio');
 
 
