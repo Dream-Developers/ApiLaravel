@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class servicio extends Model
 {
     Protected $fillable=[
-        'nombre', 'descripcion','imagen'
-    ];//
+        'nombre','descripcion','imagen'
+    ];
 }
