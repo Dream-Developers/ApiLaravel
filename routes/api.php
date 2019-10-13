@@ -26,6 +26,8 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('signup', 'AuthController@signup');
 
 
+
+
     
     
   
@@ -42,4 +44,4 @@ Route::post('servicio','ServiciosController@servicio');
 
 Route::get('recuperar','ServiciosController@Recuperar');
 
-
+Route::post('cita', 'CitasController@store');
