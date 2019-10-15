@@ -27,7 +27,8 @@ class ServiciosController extends Controller
     //Jennifer
     public function Recuperar(){
         $servicios = Servicio::all();
-        return response()->json($servicios);
+        return response()->json([
+            'servicio'=> $servicios]);
 
     }
 
