@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Cita;
 
@@ -51,7 +52,7 @@ class CitasController extends Controller
             'Direccion' => $request->Direccion,
             'Precio' => $request->Precio,
             'FechaFumigacion' => $request->FechaFumigacion,
-            'FechaProxima' => $request->FechaProxima,
+            'FechaProxima' => $request->FechaProxima= Carbon::parse($request->FechaProxima)->addMonth(6),
             'Hora' => $request->Hora
 
         ]);
