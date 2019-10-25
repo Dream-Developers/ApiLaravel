@@ -47,7 +47,10 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente = User::findOrfail($id);
+
+        return response()->json(["cliente"=>$cliente]);
+
     }
 
     /**

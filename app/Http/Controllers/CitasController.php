@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Cita;
@@ -15,7 +16,9 @@ class CitasController extends Controller
      */
     public function index()
     {
-        //
+
+        $citas = Cita::all();
+        return response()->json(["citas"=>$citas]);
     }
 
     /**
@@ -36,8 +39,6 @@ class CitasController extends Controller
      */
     public function store(Request $request)
     {
-
-
 
         $request->validate([
             'Nombre' => 'required|string',
