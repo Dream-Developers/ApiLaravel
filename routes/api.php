@@ -45,6 +45,7 @@ Route::post('servicio','ServiciosController@servicio');
 Route::get('recuperar','ServiciosController@Recuperar');
 
 Route::post('cita', 'CitasController@store');
+Route::post('peticioncita', 'PeticionCitaController@store');
 
 Route::get('clientes','ClientesController@index');
 Route::get("cliente/{id}/mostrar","ClientesController@show");
