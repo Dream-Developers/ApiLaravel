@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class servicio extends Model
+class PeticionCita extends Model
 {
     Protected $fillable=[
-        'nombre','descripcion','foto'
+        'Nombre', 'Direccion','Telefono','FechaFumigacion','Hora'
     ];
 }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Cita;
+use App\PeticionCita;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Cita;
 
-class CitasController extends Controller
+class PeticionCitaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,7 @@ class CitasController extends Controller
      */
     public function index()
     {
-
-        $citas = Cita::all();
-        return response()->json(["citas"=>$citas]);
+        //
     }
 
     /**
@@ -39,21 +37,18 @@ class CitasController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'Nombre' => 'required|string',
             'Direccion' => 'required|string',
-            'Precio' => 'required',
+            'Telefono' => 'required',
             'FechaFumigacion' => 'required',
-            'FechaProxima' => 'required',
             'Hora' => 'required',
         ]);
-        $cita = new Cita([
+        $cita = new PeticionCita([
             'Nombre' => $request->Nombre,
             'Direccion' => $request->Direccion,
-            'Precio' => $request->Precio,
+            'Telefono' => $request->Telefono,
             'FechaFumigacion' => $request->FechaFumigacion,
-            'FechaProxima' => $request->FechaProxima= Carbon::parse($request->FechaProxima)->addMonth(6),
             'Hora' => $request->Hora
 
         ]);
@@ -61,8 +56,8 @@ class CitasController extends Controller
         $cita->save();
         return response()->json([
             'message' => 'Successfully created cita!'], 201);
+        //
     }
-
 
     /**
      * Display the specified resource.
