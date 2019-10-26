@@ -40,14 +40,14 @@ class PeticionCitaController extends Controller
         $request->validate([
             'Nombre' => 'required|string',
             'Direccion' => 'required|string',
-            'Precio' => 'required',
+            'Telefono' => 'required',
             'FechaFumigacion' => 'required',
             'Hora' => 'required',
         ]);
         $cita = new PeticionCita([
             'Nombre' => $request->Nombre,
             'Direccion' => $request->Direccion,
-            'Precio' => $request->Precio,
+            'Telefono' => $request->Telefono,
             'FechaFumigacion' => $request->FechaFumigacion,
             'Hora' => $request->Hora
 
