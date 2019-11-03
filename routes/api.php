@@ -3,6 +3,7 @@
 use App\User;
 use Illuminate\Http\Request;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,6 +37,17 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('user', 'AuthController@user');
               });
 });
+
+        Route::group([
+            'namespace' => 'Auth',
+            'middleware' => 'api',
+            'prefix' => 'password'
+        ], function () {
+            Route::post('create', 'ResetPasswordController@create');
+            Route::get('find/{token}', 'ResetPasswordController@find');
+            Route::post('reset', 'ResetPasswordController@reset');
+        });
+
 
 Route::post('/prueba' ,'PruebaController@prueba');
 
