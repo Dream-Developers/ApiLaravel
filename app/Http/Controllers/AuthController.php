@@ -12,26 +12,72 @@ class AuthController extends Controller
 {
     public function signup(Request $request)
     {
+        if (($request->foto) == null) {
 
-        $request->validate([
-            'name' => 'required|string',
-            'recidencia' => 'required|string',
-            'telefono' => 'required|string',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed',
-        ]);
-        $user = new User([
-            'name' => $request->name,
-            'recidencia' => $request->recidencia,
-            'telefono' => $request->telefono,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            "rol_id"=>2
-        ]);
+            if (($request->sexo) == "F") {
+                $imagen = "femenino.png";
+            } else {
+                $imagen = "masculino.png";
+            }
+            $request->validate([
+                'name' => 'required|string',
+                'recidencia' => 'required|string',
+                'telefono' => 'required|string|max:8',
+                'email' => 'required|string|email|unique:users',
+                'password' => 'required|string|confirmed',
+                'sexo' => 'required|string',
+            ]);
+            $user = new User([
+                'name' => $request->name,
+                'recidencia' => $request->recidencia,
+                'telefono' => $request->telefono,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'sexo' => $request->sexo,
+                'foto' =>$imagen,
+                "rol_id"=>2
+            ]);
 
-        $user->save();
-        return response()->json([
-            'message' => 'Successfully created user!'], 201);
+
+            $user->save();
+
+            return response()->json([
+                'message' => 'Successfully created user!'], 201);
+        }else{
+            $exploded = explode(',', $request->foto);
+            $decode = base64_decode($exploded[0]);
+            if (str_contains($exploded[0], 'jpeg'))
+                $extension = 'jpg';
+            else
+                $extension = 'png';
+            $imagen = Carbon::now()->toDateString() ."_".$request->input("name"). '_imagen.' . $extension;
+            $path = public_path()."/foto/".$imagen;
+            file_put_contents($path, $decode);
+
+
+            $request->validate([
+                'name' => 'required|string',
+                'recidencia' => 'required|string',
+                'telefono' => 'required|string|max:8',
+                'email' => 'required|string|email|unique:users',
+                'password' => 'required|string|confirmed',
+                'sexo' => 'required|string',
+            ]);
+            $user = new User([
+                'name' => $request->name,
+                'recidencia' => $request->recidencia,
+                'telefono' => $request->telefono,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'sexo' => $request->sexo,
+                'foto' =>$imagen,
+                "rol_id"=>2
+            ]);
+
+            $user->save();
+            return response()->json([
+                'message' => 'Successfully created user!'], 201);
+        }
     }
 
     public function login(Request $request)
