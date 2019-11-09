@@ -106,6 +106,9 @@ class CitasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cita = Cita::findOrFail($id);
+        $cita->delete();
+        return response()->json([
+            'message' => 'se borro'], 201);
     }
 }
