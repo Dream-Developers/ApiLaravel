@@ -64,3 +64,5 @@ Route::get("cliente/{id}/mostrar","ClientesController@show");
 Route::get('citas','CitasController@index');
 
 Route::put('clientes/{id}/update','UserController@update');
+Route::get("imagen/{id}/mostrar","ServiciosController@show");
+

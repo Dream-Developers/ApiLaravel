@@ -65,6 +65,13 @@ class ServiciosController extends Controller
 
     }
 
+      public function show($id)
+    {
+        $datosImagen = Servicio::findOrfail($id);
+        return response()->json(["servicio"=>$datosImagen]);
+
+    }
+
 //
 
 
