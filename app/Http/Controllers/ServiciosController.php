@@ -72,6 +72,14 @@ class ServiciosController extends Controller
 
     }
 
+    public function destroy($id)
+    {
+        $servicio = Servicio::findOrFail($id);
+        $servicio->delete();
+        return response()->json([
+            'message' => 'Se borro correctamente'], 201);
+    }
+
 //
 
 
