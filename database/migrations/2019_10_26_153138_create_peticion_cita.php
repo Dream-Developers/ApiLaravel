@@ -21,6 +21,10 @@ class CreatePeticionCita extends Migration
             $table->integer('Telefono');
             $table->date('FechaFumigacion');
             $table->time('Hora');
+            $table->unsignedInteger("Estado_id");
+            $table->foreign("Estado_id")->references("id")->on("estados");
+            $table->unsignedInteger("User_id");
+            $table->foreign("User_id")->references("id")->on("users");
             $table->timestamps();
 
         });

@@ -33,4 +33,10 @@ class  User extends Authenticatable
             ->belongsToMany('App\Role')
             ->withTimestamps();
     }
+    public function estados()
+    {
+        return $this
+            ->belongsToMany('App\Estados')
+            ->withTimestamps();
+    }
 }
