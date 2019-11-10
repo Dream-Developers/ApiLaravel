@@ -43,13 +43,16 @@ class PeticionCitaController extends Controller
             'Telefono' => 'required',
             'FechaFumigacion' => 'required',
             'Hora' => 'required',
+            'User_id'=>'required|max:1',
         ]);
         $cita = new PeticionCita([
             'Nombre' => $request->Nombre,
             'Direccion' => $request->Direccion,
             'Telefono' => $request->Telefono,
             'FechaFumigacion' => $request->FechaFumigacion,
-            'Hora' => $request->Hora
+            'Hora' => $request->Hora,
+            'User_id' => $request->User_id,
+            'Estado_id'=>1,
 
         ]);
 
