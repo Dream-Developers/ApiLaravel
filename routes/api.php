@@ -55,6 +55,7 @@ Route::post('api/Contenido','servicioController@store');
 Route::post('servicio','ServiciosController@servicio');
 
 Route::get('recuperar','ServiciosController@Recuperar');
+Route::get('recuperar/{id}/peticonesCitas','PeticionCitaController@index');
 
 Route::post('cita', 'CitasController@store');
 Route::post('peticioncita', 'PeticionCitaController@store');
