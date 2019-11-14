@@ -80,6 +80,26 @@ class ServiciosController extends Controller
             'message' => 'Se borro correctamente'], 201);
     }
 
+    public function update(Request $request,$id){
+
+        $this->validate($request,[
+            'nombre' => 'max:50',
+            'descripcion' => 'max:50',
+        ]);
+
+        //buscar la instancia en la base de datos
+        $servicio = Servicio::findOrfail($id);
+        $servicio->nombre = $request->input('nombre');
+        $servicio->descripcion = $request->input('descripcion');
+        $servicio->save();
+
+
+        return response()->json(['updated'=> true,
+            'message' => 'Se actualizaron los datos correctamente'])
+            ->header('Content-Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
+
+    }
+
 //
 
 

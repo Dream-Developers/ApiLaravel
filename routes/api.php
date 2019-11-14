@@ -68,3 +68,4 @@ Route::put('clientes/{id}/update','UserController@update');
 Route::get("imagen/{id}/mostrar","ServiciosController@show");
 Route::delete('imagen/{id}/borrar', 'ServiciosController@destroy');
 Route::delete('citas/{id}/borrar', 'CitasController@destroy');
+Route::put('servicios/{id}/update','ServiciosController@update');
