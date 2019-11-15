@@ -74,10 +74,14 @@ class PeticionCitaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    public function show(){
+        $citas = PeticionCita::where("Estado_id","1")->get();
+        return response()->json(["citas"=>$citas])
+
+            ->header('Content_Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
+        ;
+            //
+        }
 
     /**
      * Show the form for editing the specified resource.

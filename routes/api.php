@@ -58,6 +58,7 @@ Route::post('cita', 'CitasController@store');
 Route::get('clientes','ClientesController@index');
 Route::get("cliente/{id}/mostrar","ClientesController@show");
 Route::get('citas','CitasController@index');
+Route::get('peticion/recuperar','PeticionCitaController@show');
 
 Route::put('clientes/{id}/update','UserController@update');
 Route::put('peticionesCitas/{id}/update','PeticionCitaController@update');
