@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cita;
 use App\PeticionCita;
+use App\servicio;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,11 @@ class PeticionCitaController extends Controller
      */
     public function index($id)
     {
-        $citas = PeticionCita::all()->where('User_id', '=', $id);
-        return response()->json(["citas"=>$citas]);
+        $citas = PeticionCita::where("User_id","$id")->get();
+        return response()->json(["citas"=>$citas])
+
+            ->header('Content_Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
+        ;
         //
     }
 
@@ -45,7 +49,7 @@ class PeticionCitaController extends Controller
             'Telefono' => 'required',
             'FechaFumigacion' => 'required',
             'Hora' => 'required',
-            'User_id'=>'required|max:1',
+            'User_id'=>'required',
         ]);
         $cita = new PeticionCita([
             'Nombre' => $request->Nombre,
@@ -95,8 +99,19 @@ class PeticionCitaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+
+        //buscar la instancia en la base de datos
+        $servicio = PeticionCita::findOrfail($id);
+        $servicio->Estado_id = $request->input('Estado_id');
+        $servicio->save();
+
+
+        return response()->json(['updated'=> true,
+            'message' => 'Se actualizaron los datos correctamente'])
+            ->header('Content-Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
+
+    }  //
+
 
     /**
      * Remove the specified resource from storage.
@@ -106,6 +121,10 @@ class PeticionCitaController extends Controller
      */
     public function destroy($id)
     {
+        $cita = PeticionCita::findOrFail($id);
+        $cita->delete();
+        return response()->json([
+            'message' => 'se borro'], 201);
         //
     }
 }

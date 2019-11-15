@@ -25,12 +25,7 @@ Route::get("/usuarios",function (){
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');
     Route::post('signup', 'AuthController@signup');
-
-
-
-
-    
-    
+    Route::post('peticioncita', 'PeticionCitaController@store');
   
     Route::group(['middleware' => 'auth:api'], function() {
         Route::get('logout', 'AuthController@logout');
@@ -55,17 +50,17 @@ Route::post('api/Contenido','servicioController@store');
 Route::post('servicio','ServiciosController@servicio');
 
 Route::get('recuperar','ServiciosController@Recuperar');
-Route::get('recuperar/{id}/peticonesCitas','PeticionCitaController@index');
+Route::get('recuperar/{id}/peticionesCitas','PeticionCitaController@index');
 
 Route::post('cita', 'CitasController@store');
-Route::post('peticioncita', 'PeticionCitaController@store');
+
 
 Route::get('clientes','ClientesController@index');
 Route::get("cliente/{id}/mostrar","ClientesController@show");
 Route::get('citas','CitasController@index');
 
 Route::put('clientes/{id}/update','UserController@update');
+Route::put('peticionesCitas/{id}/update','PeticionCitaController@update');
 Route::get("imagen/{id}/mostrar","ServiciosController@show");
 Route::delete('imagen/{id}/borrar', 'ServiciosController@destroy');
 Route::delete('citas/{id}/borrar', 'CitasController@destroy');
-Route::put('servicios/{id}/update','ServiciosController@update');
