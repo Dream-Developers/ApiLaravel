@@ -82,8 +82,11 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+
+        $cliente = User::findOrFail($id);
+        $cliente->delete();
+        return response()->json([
+            'message' => 'se borro'], 201);
     }
 }
