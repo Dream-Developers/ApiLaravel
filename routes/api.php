@@ -60,9 +60,11 @@ Route::get("cliente/{id}/mostrar","ClientesController@show");
 Route::get('citas','CitasController@index');
 
 Route::put('clientes/{id}/update','UserController@update');
+Route::put('servicios/{id}/update','ServiciosController@update');
 Route::put('peticionesCitas/{id}/update','PeticionCitaController@update');
 Route::get("imagen/{id}/mostrar","ServiciosController@show");
 Route::delete('imagen/{id}/borrar', 'ServiciosController@destroy');
 Route::delete('citas/{id}/borrar', 'CitasController@destroy');
 Route::delete('registro/{id}/delete','ClientesController@destroy');
+
 
