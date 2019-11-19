@@ -91,6 +91,7 @@ class ServiciosController extends Controller
         $servicio = Servicio::findOrfail($id);
         $servicio->nombre = $request->input('nombre');
         $servicio->descripcion = $request->input('descripcion');
+        $servicio->foto = $request->input('foto');
         $servicio->save();
 
 
