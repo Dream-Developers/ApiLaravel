@@ -80,26 +80,39 @@ class ServiciosController extends Controller
             'message' => 'Se borro correctamente'], 201);
     }
 
-    public function update(Request $request,$id){
+    public function update(Request $request){
 
         $this->validate($request,[
             'nombre' => 'max:50',
             'descripcion' => 'max:50',
-        ]);
-
-        //buscar la instancia en la base de datos
-        $servicio = Servicio::findOrfail($id);
-        $servicio->nombre = $request->input('nombre');
-        $servicio->descripcion = $request->input('descripcion');
-        $servicio->foto = $request->input('foto');
-        $servicio->save();
+            'foto'=> 'nullable']);
 
 
-        return response()->json(['updated'=> true,
-            'message' => 'Se actualizaron los datos correctamente'])
-            ->header('Content-Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
+           $exploded = explode(',', $request->foto);
+           $decode = base64_decode($exploded[0]);
+           if (str_contains($exploded[0], 'jpeg'))
+               $extension = 'jpg';
+           else
+               $extension = 'png';
+           $imagen = str_random() . '.' . $extension;
+           $path = public_path()."/imagen/".$imagen;
+           file_put_contents($path, $decode);
 
-    }
+           //buscar la instancia en la base de datos
+           $servicio = Servicio::findOrfail($request->id);
+           $servicio->nombre = $request->input('nombre');
+           $servicio->descripcion = $request->input('descripcion');
+           $servicio->foto = $imagen;
+           $servicio->save();
+
+
+           return response()->json(['updated'=> true,
+               'message' => 'Se actualizaron los datos correctamente'])
+               ->header('Content-Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
+
+       }
+
+
 
 //
 
