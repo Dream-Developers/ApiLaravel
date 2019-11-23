@@ -59,6 +59,8 @@ Route::get('clientes','ClientesController@index');
 Route::get("cliente/{id}/mostrar","ClientesController@show");
 Route::get('citas','CitasController@index');
 Route::get('peticion/recuperar','PeticionCitaController@show');
+Route::get('peticion/{id}/mostrar', 'PeticionCitaController@mostrar');
+
 
 Route::put('clientes/{id}/update','UserController@update');
 Route::put('servicios/{id}/update','ServiciosController@update');
