@@ -83,6 +83,8 @@ class PeticionCitaController extends Controller
             //
         }
 
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -130,5 +132,10 @@ class PeticionCitaController extends Controller
         return response()->json([
             'message' => 'se borro'], 201);
         //
+    }
+    public function mostrar($id){
+        $cliente = PeticionCita::findOrfail($id);
+
+        return response()->json(["cita"=>$cliente]);
     }
 }
