@@ -48,6 +48,7 @@ class PeticionCitaController extends Controller
             'Direccion' => 'required|string',
             'Telefono' => 'required',
             'FechaFumigacion' => 'required',
+            'Servicio' => 'required',
             'Hora' => 'required',
             'User_id'=>'required',
         ]);
@@ -56,6 +57,7 @@ class PeticionCitaController extends Controller
             'Direccion' => $request->Direccion,
             'Telefono' => $request->Telefono,
             'FechaFumigacion' => $request->FechaFumigacion,
+            'Servicio' => $request->Servicio,
             'Hora' => $request->Hora,
             'User_id' => $request->User_id,
             'Estado_id'=>1,

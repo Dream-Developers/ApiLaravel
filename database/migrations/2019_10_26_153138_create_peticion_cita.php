@@ -18,6 +18,7 @@ class CreatePeticionCita extends Migration
             $table->increments('id');
             $table->string('Nombre');
             $table->string('Direccion');
+            $table->string('Servicio');
             $table->integer('Telefono');
             $table->date('FechaFumigacion');
             $table->time('Hora');

@@ -20,17 +20,22 @@ Route::get("/usuarios",function (){
     $usuarios = User::all();
     return response()->json(["usuarios"=>$usuarios]);
 })->middleware("verificar:api");
-
+Route::get('recuperar/{id}/peticionesCitas','PeticionCitaController@index')->middleware("verificar:api");
+Route::put('peticionesCitas/{id}/update','PeticionCitaController@update')->middleware("verificar:api");
+Route::post('factura','FacturasController@store')->middleware("verificar:api");
+Route::post('peticioncita', 'PeticionCitaController@store')->middleware("verificar:api");
+Route::post('cita', 'CitasController@store')->middleware("verificar:api");
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');
     Route::post('signup', 'AuthController@signup');
-    Route::post('peticioncita', 'PeticionCitaController@store');
+
   
     Route::group(['middleware' => 'auth:api'], function() {
         Route::get('logout', 'AuthController@logout');
         Route::get('user', 'AuthController@user');
-              });
+
+    });
 });
 
         Route::group([
@@ -50,9 +55,8 @@ Route::post('api/Contenido','servicioController@store');
 Route::post('servicio','ServiciosController@servicio');
 
 Route::get('recuperar','ServiciosController@Recuperar');
-Route::get('recuperar/{id}/peticionesCitas','PeticionCitaController@index');
 
-Route::post('cita', 'CitasController@store');
+
 
 
 Route::get('clientes','ClientesController@index');
@@ -64,7 +68,7 @@ Route::get('peticion/{id}/mostrar', 'PeticionCitaController@mostrar');
 
 Route::put('clientes/{id}/update','UserController@update');
 Route::put('servicios/{id}/update','ServiciosController@update');
-Route::put('peticionesCitas/{id}/update','PeticionCitaController@update');
+
 Route::get("imagen/{id}/mostrar","ServiciosController@show");
 Route::delete('imagen/{id}/borrar', 'ServiciosController@destroy');
 Route::delete('citas/{id}/borrar', 'CitasController@destroy');

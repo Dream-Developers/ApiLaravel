@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PeticionCita extends Model
 {
     Protected $fillable=[
-        'Nombre', 'Direccion','Telefono','FechaFumigacion','Hora','User_id','Estado_id'
+        'Nombre', 'Direccion','Telefono','FechaFumigacion','Hora','User_id','Estado_id','Servicio'
     ];
     public function users()
     {
