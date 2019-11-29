@@ -81,18 +81,18 @@ class ServiciosController extends Controller
     }
 
     public function update(Request $request){
+        if (($request->foto) == null) {
 
-        $this->validate($request,[
-            'nombre' => 'max:50',
-            'descripcion' => 'max:50',
-            'foto'=> 'nullable']);
+            $this->validate($request, [
+                'nombre' => 'max:50',
+                'descripcion' => 'max:250',
+            ]);
 
 
-           $exploded = explode(',', $request->foto);
-           $decode = base64_decode($exploded[0]);
-           if (str_contains($exploded[0], 'jpeg'))
-               $extension = 'jpg';
-           else
+            $exploded = explode(',', $request->foto);
+            $decode = base64_decode($exploded[0]);
+            if (str_contains($exploded[0], 'jpeg'))
+                $extension = 'jpg';
                $extension = 'png';
            $imagen = str_random() . '.' . $extension;
            $path = public_path()."/imagen/".$imagen;
@@ -102,7 +102,7 @@ class ServiciosController extends Controller
            $servicio = Servicio::findOrfail($request->id);
            $servicio->nombre = $request->input('nombre');
            $servicio->descripcion = $request->input('descripcion');
-           $servicio->foto = $imagen;
+
            $servicio->save();
 
 
@@ -110,8 +110,35 @@ class ServiciosController extends Controller
                'message' => 'Se actualizaron los datos correctamente'])
                ->header('Content-Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
 
-       }
+       }else{
+            $this->validate($request, [
+                'nombre' => 'max:50',
+                'descripcion' => 'max:250',
+            ]);
 
+
+            $exploded = explode(',', $request->foto);
+            $decode = base64_decode($exploded[0]);
+            if (str_contains($exploded[0], 'jpeg'))
+                $extension = 'jpg';
+            $extension = 'png';
+            $imagen = str_random() . '.' . $extension;
+            $path = public_path()."/imagen/".$imagen;
+            file_put_contents($path, $decode);
+
+            //buscar la instancia en la base de datos
+            $servicio = Servicio::findOrfail($request->id);
+            $servicio->nombre = $request->input('nombre');
+            $servicio->descripcion = $request->input('descripcion');
+            $servicio->foto = $imagen;
+
+            $servicio->save();
+
+
+            return response()->json(['updated'=> true,
+                'message' => 'Se actualizaron los datos correctamente'])
+                ->header('Content-Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
+        }}
 
 
 //
