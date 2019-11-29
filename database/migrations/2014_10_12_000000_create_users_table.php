@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->foreign("rol_id")->references("id")->on("roles");
             $table->string('foto')->nullable();
+            $table->string("firebase_token")->nullable();
             $table->string('sexo');
             $table->rememberToken();
             $table->timestamps();

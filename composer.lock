@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "613281bb8014caa56592186f3800d88e",
+    "content-hash": "a41a94612fb154d37c42ef890b320561",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -230,6 +230,45 @@
                 "php"
             ],
             "time": "2019-07-30T19:33:28+00:00"
+        },
+        {
+            "name": "douglasresendemaciel/fcm-laravel-notification",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/douglasresendemaciel/fcm-laravel-notification.git",
+                "reference": "5b3563cf5af46c42ad643111626593bad5e8d4c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/douglasresendemaciel/fcm-laravel-notification/zipball/5b3563cf5af46c42ad643111626593bad5e8d4c5",
+                "reference": "5b3563cf5af46c42ad643111626593bad5e8d4c5",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.2",
+                "illuminate/contracts": "^5.3",
+                "illuminate/notifications": "^5.3",
+                "illuminate/support": "^5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DouglasResende\\FCM\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Douglas Resende Maciel",
+                    "email": "eu@douglasresende.com"
+                }
+            ],
+            "description": "Driver to connect laravel´s notification system to Google Firebase Cloud Messaging",
+            "time": "2017-11-14T12:57:19+00:00"
         },
         {
             "name": "dragonmantank/cron-expression",
@@ -5422,7 +5461,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "douglasresendemaciel/fcm-laravel-notification": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

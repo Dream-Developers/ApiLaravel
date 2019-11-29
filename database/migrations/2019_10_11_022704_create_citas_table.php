@@ -21,6 +21,8 @@ class CreateCitasTable extends Migration
             $table->date('FechaFumigacion');
             $table->date('FechaProxima');
             $table->time('Hora');
+            $table->unsignedInteger("id_usuario");
+            $table->foreign("id_usuario")->references("id")->on("users");
             $table->timestamps();
 
         });

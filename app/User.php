@@ -16,7 +16,7 @@ class  User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','recidencia','telefono', 'email', 'password', "rol_id","foto","sexo"];
+        'name','recidencia','telefono', 'email', 'password', "rol_id","foto","sexo","firebase_token"];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -38,5 +38,11 @@ class  User extends Authenticatable
         return $this
             ->belongsToMany('App\Estados')
             ->withTimestamps();
+    }
+
+
+    public function routeNotificationForFcm() {
+        //return a device token, either from the model or from some other place.
+        return $this->firebase_token;
     }
 }

@@ -48,7 +48,12 @@ Route::group(['prefix' => 'auth'], function () {
             Route::post('reset', 'ResetPasswordController@reset');
         });
 
-
+        Route::put("/token_firebase","UserController@actualizarTokenFirebase");
+        Route::get("/prueba",function (){
+           $user = User::find(1);
+           $user->notify(new \App\Notifications\FirebaseNotification());
+           return $user->firebase_token;
+        });
 Route::post('/prueba' ,'PruebaController@prueba');
 
 Route::post('api/Contenido','servicioController@store');

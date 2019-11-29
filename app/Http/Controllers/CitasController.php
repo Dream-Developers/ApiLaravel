@@ -54,7 +54,8 @@ class CitasController extends Controller
             'Precio' => $request->Precio,
             'FechaFumigacion' => $request->FechaFumigacion,
             'FechaProxima' => $request->FechaProxima= Carbon::parse($request->FechaProxima)->addMonth(6),
-            'Hora' => $request->Hora
+            'Hora' => $request->Hora,
+            'id_usuario'=> $request->id_usuario
 
         ]);
 

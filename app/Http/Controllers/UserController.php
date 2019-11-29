@@ -41,4 +41,17 @@ class UserController extends Controller
     }
 
 
+    public function actualizarTokenFirebase(Request $request){
+        $user = User::findOrFail($request->id);
+        $user->firebase_token= $request->firebase_token;
+        $user->save();
+
+
+        return response()->json(['updated' => true,
+            'message' => 'Se actualizarón los datos correctamente'])
+            ->header('Content-Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
+
+
+    }
+
 }
