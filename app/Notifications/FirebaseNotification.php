@@ -12,14 +12,18 @@ class FirebaseNotification extends Notification
 {
     use Queueable;
 
+    private $title;
+    private $body;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($title,$body)
     {
-        //
+     $this->  title=$title;
+     $this->body=$body;
     }
 
     /**
@@ -36,7 +40,7 @@ class FirebaseNotification extends Notification
     public function toFcm($notifiable)
     {
 
-        return (new FirebaseMessage())->setContent('Test Notification', 'This is a Test');
+        return (new FirebaseMessage())->setContent($this->title, $this->body);
 
     }
 }

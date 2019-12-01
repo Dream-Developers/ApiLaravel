@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\FirebaseNotification;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -58,6 +59,17 @@ class CitasController extends Controller
             'id_usuario'=> $request->id_usuario
 
         ]);
+
+        $user = User::findOrfail($request->id_usuario);
+
+        $user->notify(new FirebaseNotification("Se envio tu solicitud de cita",
+            "La cita sera aceptada por administrador de la apliacion"));
+
+        $admin = User::where("rol_id","=",1)->first();
+
+        $admin->notify(new FirebaseNotification("Proxima Cita","Tienes una cita nueva con la siguiente informacion: Nombre".$user
+        ->name));
+
 
         $cita->save();
         return response()->json([
