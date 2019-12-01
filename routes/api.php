@@ -25,6 +25,8 @@ Route::put('peticionesCitas/{id}/update','PeticionCitaController@update')->middl
 Route::post('factura','FacturasController@store')->middleware("verificar:api");
 Route::post('peticioncita', 'PeticionCitaController@store')->middleware("verificar:api");
 Route::post('cita', 'CitasController@store')->middleware("verificar:api");
+Route::get('recuperar/factura', 'FacturasController@index')->middleware("verificar:api");
+
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');

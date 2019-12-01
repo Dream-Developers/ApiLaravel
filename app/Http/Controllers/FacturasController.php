@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cita;
 use App\Factura;
 use App\PeticionCita;
 use Illuminate\Http\Request;
@@ -15,6 +16,8 @@ class FacturasController extends Controller
      */
     public function index()
     {
+        $citas = Factura::all();
+        return response()->json(["citas"=>$citas]);
         //
     }
 
