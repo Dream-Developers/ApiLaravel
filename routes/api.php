@@ -59,7 +59,7 @@ Route::post('/prueba' ,'PruebaController@prueba');
 Route::post('api/Contenido','servicioController@store');
 Route::post('servicio','ServiciosController@servicio');
 
-Route::get('recuperar','ServiciosController@Recuperar')->middleware("verificar:api";
+Route::get('recuperar','ServiciosController@Recuperar')->middleware("verificar:api");
 
 
 
