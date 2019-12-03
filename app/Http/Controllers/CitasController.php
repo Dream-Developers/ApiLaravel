@@ -71,6 +71,7 @@ class CitasController extends Controller
         ->name));
 
 
+
         $cita->save();
         return response()->json([
             'message' => 'Successfully created cita!'], 201);

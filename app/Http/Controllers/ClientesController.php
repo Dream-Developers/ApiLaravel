@@ -14,7 +14,8 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all();
+
+        $usuarios = User::where('rol_id',"=",2)->get();
         return response()->json(["clientes"=>$usuarios]);
     }
 
