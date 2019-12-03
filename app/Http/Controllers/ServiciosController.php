@@ -84,8 +84,8 @@ class ServiciosController extends Controller
         if (($request->foto) == null) {
 
             $this->validate($request, [
-                'nombre' => 'max:150',
-                'descripcion' => 'max:350',
+                'nombre' => 'required|string',
+                'descripcion' => 'required|string',
             ]);
 
 
@@ -112,8 +112,8 @@ class ServiciosController extends Controller
 
        }else{
             $this->validate($request, [
-                'nombre' => 'max:150',
-                'descripcion' => 'max:350',
+                'nombre' => 'required|string',
+                'descripcion' => 'required|string',
             ]);
 
 

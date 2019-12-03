@@ -13,9 +13,9 @@ class UserController extends Controller
         if (($request->foto) == null) {
 
             $this->validate($request, [
-                'name' => 'max:50',
-                'recidencia' => 'max:250',
-                'telefono' => 'numeric',
+                'name' => 'required|string',
+                'recidencia' => 'required|string',
+                'telefono' => 'required|string|max:8',
             ]);
             $exploded = explode(',', $request->foto);
             $decode = base64_decode($exploded[0]);
@@ -40,9 +40,9 @@ class UserController extends Controller
 
         } else{
             $this->validate($request, [
-                'name' => 'max:50',
-                'recidencia' => 'max:250',
-                'telefono' => 'numeric',
+                'name' => 'required|string',
+                'recidencia' => 'required|string',
+                'telefono' => 'required|string|max:8',
             ]);
             $exploded = explode(',', $request->foto);
             $decode = base64_decode($exploded[0]);
