@@ -85,6 +85,8 @@ class CitasController extends Controller
      */
     public function show($id)
     {
+        $citas =Cita::findOrfail($id);
+        return response()->json(["citas"=>$citas]);
         //
     }
 

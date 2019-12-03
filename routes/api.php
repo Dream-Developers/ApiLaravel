@@ -77,4 +77,6 @@ Route::delete('imagen/{id}/borrar', 'ServiciosController@destroy');
 Route::delete('citas/{id}/borrar', 'CitasController@destroy');
 Route::delete('registro/{id}/delete','ClientesController@destroy');
 
+Route::get('citas/{id}/mostrar','CitasController@show');
+
 
