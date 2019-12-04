@@ -31,7 +31,7 @@ class AuthController extends Controller
 
 
             ]);
-            if(strtoupper($request->input("sexo"))==="F"||strtoupper($request->input("sexo"))==="F"){
+            if(strtoupper($request->input("sexo"))==="F"||strtoupper($request->input("sexo"))==="M"){
             $user = new User([
                 'name' => $request->name,
                 'recidencia' => $request->recidencia,
@@ -71,7 +71,7 @@ class AuthController extends Controller
                 'password' => 'required|string|confirmed|min:8',
                 'sexo' => 'required|string',
             ]);
-            if (strtoupper($request->input("sexo")) === "F" || strtoupper($request->input("sexo")) === "F") {
+            if (strtoupper($request->input("sexo")) === "F" || strtoupper($request->input("sexo")) === "M") {
                 $user = new User([
                     'name' => $request->name,
                     'recidencia' => $request->recidencia,
@@ -85,7 +85,8 @@ class AuthController extends Controller
 
                 $user->save();
                 return response()->json([
-                    'message' => 'Successfully created user!'], 201);}else{
+                    'message' => 'Successfully created user!'], 201);}
+            else{
                 return response()->json([
                     'message' => 'Solo se acepta F o M '], 201);
             }
