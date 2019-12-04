@@ -46,11 +46,11 @@ class PeticionCitaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Nombre' => 'required|string',
+            'Nombre' => 'required|string|max:50',
             'Direccion' => 'required|string',
-            'Telefono' => 'required',
-            'FechaFumigacion' => 'required',
-            'Servicio' => 'required',
+            'Telefono' => 'required|numeric|max:99999999|min:9999999',
+            'FechaFumigacion' => 'required|date',
+            'Servicio' => 'required|string',
             'Hora' => 'required',
             'User_id'=>'required',
         ]);
@@ -66,7 +66,7 @@ class PeticionCitaController extends Controller
 
         ]);
 
-
+        $cita->save();
         $user = User::findOrfail($request->User_id);
 
         $user->notify(new FirebaseNotification("Se envio tu solicitud de cita",
@@ -80,7 +80,7 @@ class PeticionCitaController extends Controller
                 ->name));
 
 
-        $cita->save();
+
         return response()->json([
             'message' => 'Successfully created cita!'], 201);
         //

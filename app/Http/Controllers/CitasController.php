@@ -42,11 +42,11 @@ class CitasController extends Controller
     {
 
         $request->validate([
-            'Nombre' => 'required|string',
+            'Nombre' => 'required|string|max:50',
             'Direccion' => 'required|string',
-            'Precio' => 'required',
-            'FechaFumigacion' => 'required',
-            'FechaProxima' => 'required',
+            'Precio' => 'required|numeric|max:999999',
+            'FechaFumigacion' => 'required|date',
+            'FechaProxima' => 'required|date',
             'Hora' => 'required',
         ]);
         $cita = new Cita([
@@ -59,7 +59,7 @@ class CitasController extends Controller
             'id_usuario'=> $request->id_usuario
 
         ]);
-
+        $cita->save();
         $user = User::findOrfail($request->id_usuario);
 
         $user->notify(new FirebaseNotification("Se envio tu solicitud de cita",
@@ -72,7 +72,7 @@ class CitasController extends Controller
 
 
 
-        $cita->save();
+
         return response()->json([
             'message' => 'Successfully created cita!'], 201);
     }

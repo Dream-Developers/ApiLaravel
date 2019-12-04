@@ -40,10 +40,10 @@ class FacturasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Nombre' => 'required|string',
+            'Nombre' => 'required|string||max:50',
             'Detalle' => 'required|string',
-            'Total' => 'required',
-            'Fecha' => 'required',
+            'Total' => 'required|numeric|max:999999999',
+            'Fecha' => 'required|date',
         ]);
         $cita = new Factura([
             'Nombre' => $request->Nombre,

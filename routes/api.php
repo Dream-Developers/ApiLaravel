@@ -59,7 +59,7 @@ Route::post('servicio','ServiciosController@servicio');
 Route::get('recuperar','ServiciosController@Recuperar');
 Route::get('recuperar/{id}/peticionesCitas','PeticionCitaController@index');
 
-Route::post('cita', 'CitasController@store');
+
 
 
 Route::get('clientes','ClientesController@index');

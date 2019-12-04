@@ -20,13 +20,18 @@ class AuthController extends Controller
                 $imagen = "masculino.png";
             }
             $request->validate([
-                'name' => 'required|string',
+                'name' => 'required|string|max:50',
                 'recidencia' => 'required|string',
-                'telefono' => 'required|string|max:8',
+                'telefono' => 'required|numeric|max:99999999|min:9999999',
                 'email' => 'required|string|email|unique:users',
-                'password' => 'required|string|confirmed',
+                'password' => 'required|string|confirmed|min:8',
                 'sexo' => 'required|string',
+
+
+
+
             ]);
+            if(strtoupper($request->input("sexo"))==="F"||strtoupper($request->input("sexo"))==="F"){
             $user = new User([
                 'name' => $request->name,
                 'recidencia' => $request->recidencia,
@@ -42,41 +47,48 @@ class AuthController extends Controller
             $user->save();
 
             return response()->json([
-                'message' => 'Successfully created user!'], 201);
-        }else{
+                'message' => 'Successfully created user!'], 201);}else{
+                return response()->json([
+                    'message' => 'Solo se acepta F o M '], 201);
+            }
+        }else {
             $exploded = explode(',', $request->foto);
             $decode = base64_decode($exploded[0]);
             if (str_contains($exploded[0], 'jpeg'))
                 $extension = 'jpg';
             else
                 $extension = 'png';
-            $imagen = Carbon::now()->toDateString() ."_".$request->input("name"). '_imagen.' . $extension;
-            $path = public_path()."/foto/".$imagen;
+            $imagen = Carbon::now()->toDateString() . "_" . $request->input("name") . '_imagen.' . $extension;
+            $path = public_path() . "/foto/" . $imagen;
             file_put_contents($path, $decode);
 
 
             $request->validate([
-                'name' => 'required|string',
+                'name' => 'required|string|max:50',
                 'recidencia' => 'required|string',
-                'telefono' => 'required|string|max:8',
+                'telefono' => 'required|numeric|max:99999999|min:9999999',
                 'email' => 'required|string|email|unique:users',
-                'password' => 'required|string|confirmed',
+                'password' => 'required|string|confirmed|min:8',
                 'sexo' => 'required|string',
             ]);
-            $user = new User([
-                'name' => $request->name,
-                'recidencia' => $request->recidencia,
-                'telefono' => $request->telefono,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
-                'sexo' => $request->sexo,
-                'foto' =>$imagen,
-                "rol_id"=>2
-            ]);
+            if (strtoupper($request->input("sexo")) === "F" || strtoupper($request->input("sexo")) === "F") {
+                $user = new User([
+                    'name' => $request->name,
+                    'recidencia' => $request->recidencia,
+                    'telefono' => $request->telefono,
+                    'email' => $request->email,
+                    'password' => bcrypt($request->password),
+                    'sexo' => $request->sexo,
+                    'foto' => $imagen,
+                    "rol_id" => 2
+                ]);
 
-            $user->save();
-            return response()->json([
-                'message' => 'Successfully created user!'], 201);
+                $user->save();
+                return response()->json([
+                    'message' => 'Successfully created user!'], 201);}else{
+                return response()->json([
+                    'message' => 'Solo se acepta F o M '], 201);
+            }
         }
     }
 
