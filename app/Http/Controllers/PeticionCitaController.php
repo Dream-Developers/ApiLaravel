@@ -19,11 +19,9 @@ class PeticionCitaController extends Controller
      */
     public function index($id)
     {
-        $citas = PeticionCita::where("User_id","$id")->get();
-        return response()->json(["citas"=>$citas])
-
-            ->header('Content_Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
-        ;
+        $citas = PeticionCita::where("User_id", "$id")->get();
+        return response()->json(["citas" => $citas])
+            ->header('Content_Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');;
         //
     }
 
@@ -40,7 +38,7 @@ class PeticionCitaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -52,7 +50,7 @@ class PeticionCitaController extends Controller
             'FechaFumigacion' => 'required|date',
             'Servicio' => 'required|string',
             'Hora' => 'required',
-            'User_id'=>'required',
+            'User_id' => 'required',
         ]);
         $cita = new PeticionCita([
             'Nombre' => $request->Nombre,
@@ -62,7 +60,7 @@ class PeticionCitaController extends Controller
             'Servicio' => $request->Servicio,
             'Hora' => $request->Hora,
             'User_id' => $request->User_id,
-            'Estado_id'=>1,
+            'Estado_id' => 1,
 
         ]);
 
@@ -73,12 +71,11 @@ class PeticionCitaController extends Controller
             "La cita sera aceptada por administrador de la apliacion"));
 
 
+        $admin = User::where("rol_id", "=", 1)->first();
 
-        $admin = User::where("rol_id","=",1)->first();
 
-        $admin->notify(new FirebaseNotification("Proxima Cita","Tienes una cita nueva con la siguiente informacion: ".$user
+        $admin->notify(new FirebaseNotification("Proxima Cita", "Tienes una cita nueva con la siguiente informacion: " . $user
                 ->name));
-
 
 
         return response()->json([
@@ -89,24 +86,22 @@ class PeticionCitaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(){
-        $citas = PeticionCita::where("Estado_id","1")->get();
-        return response()->json(["citas"=>$citas])
-
-            ->header('Content_Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
-        ;
-            //
-        }
-
+    public function show()
+    {
+        $citas = PeticionCita::where("Estado_id", "1")->get();
+        return response()->json(["citas" => $citas])
+            ->header('Content_Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');;
+        //
+    }
 
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -117,8 +112,8 @@ class PeticionCitaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -130,7 +125,7 @@ class PeticionCitaController extends Controller
         $servicio->save();
 
 
-        return response()->json(['updated'=> true,
+        return response()->json(['updated' => true,
             'message' => 'Se actualizaron los datos correctamente'])
             ->header('Content-Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
 
@@ -140,7 +135,7 @@ class PeticionCitaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -151,9 +146,11 @@ class PeticionCitaController extends Controller
             'message' => 'se borro'], 201);
         //
     }
-    public function mostrar($id){
+
+    public function mostrar($id)
+    {
         $cliente = PeticionCita::findOrfail($id);
 
-        return response()->json(["cita"=>$cliente]);
+        return response()->json(["cita" => $cliente]);
     }
 }
