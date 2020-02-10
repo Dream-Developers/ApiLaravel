@@ -15,15 +15,18 @@ class FirebaseNotification extends Notification
     private $title;
     private $body;
 
+    protected $data;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($title,$body)
+    public function __construct($data,$title,$body)
     {
      $this->  title=$title;
      $this->body=$body;
+     $this->data=$data;
     }
 
     /**
@@ -40,7 +43,7 @@ class FirebaseNotification extends Notification
     public function toFcm($notifiable)
     {
 
-        return (new FirebaseMessage())->setContent($this->title, $this->body);
+        return (new FirebaseMessage())->setContent($this->title, $this->data);
 
     }
 }

@@ -19,7 +19,7 @@ class CitasController extends Controller
     {
 
         $citas = Cita::all();
-        return response()->json(["citas"=>$citas]);
+        return response()->json(["estado"=>1,"citas"=>$citas]);
     }
 
     /**
