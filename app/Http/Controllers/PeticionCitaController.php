@@ -67,14 +67,19 @@ class PeticionCitaController extends Controller
         $cita->save();
         $user = User::findOrfail($request->User_id);
 
-        $user->notify(new FirebaseNotification("Se envio tu solicitud de cita",
-            "La cita sera aceptada por administrador de la apliacion"));
+
+        $data = array(
+            "id_cita" => $user->id,
+            "body" => "Tienes una cita nueva con la siguiente informacion:: ' ". $user->Nombre . "''"
+        , "click_action"=>"Detalle_Cita"
+
+        );
 
 
         $admin = User::where("rol_id", "=", 1)->first();
 
 
-        $admin->notify(new FirebaseNotification("Proxima Cita", "Tienes una cita nueva con la siguiente informacion: " . $user
+        $admin->notify(new FirebaseNotification($data,"Proxima Cita", "Tienes una cita nueva con la siguiente informacion: " . $user
                 ->name));
 
 
