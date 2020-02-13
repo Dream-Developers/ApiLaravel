@@ -25,7 +25,7 @@ Route::post('peticioncita', 'PeticionCitaController@store');
 Route::get('recuperar/{id}/peticionesCitas','PeticionCitaController@index')->middleware("verificar:api");
 Route::put('peticionesCitas/{id}/update','PeticionCitaController@update')->middleware("verificar:api");
 Route::post('factura','FacturasController@store')->middleware("verificar:api");
-Route::post('peticioncita', 'PeticionCitaController@store');
+Route::post('peticioncita', 'PeticionCitaController@store')->middleware("verificar:api");
 Route::post('cita', 'CitasController@store')->middleware("verificar:api");
 Route::get('recuperar/factura', 'FacturasController@index')->middleware("verificar:api");
 
