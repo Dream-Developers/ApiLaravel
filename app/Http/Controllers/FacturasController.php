@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Cita;
 use App\Factura;
-use App\PeticionCita;
+use App\User;
 use Illuminate\Http\Request;
 
 class FacturasController extends Controller
@@ -66,7 +65,10 @@ class FacturasController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente = Factura::findOrfail($id);
+
+        return response()->json(["cliente"=>$cliente]);
+
     }
 
     /**
@@ -77,7 +79,7 @@ class FacturasController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -89,7 +91,18 @@ class FacturasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $servicio = Factura::find($id);
+        $servicio->Nombre = $request->input('Nombre');
+        $servicio->Detalle = $request->input('Detalle');
+        $servicio->Total = $request->input('Total');
+        $servicio->Fecha = $request->input('Fecha');
+        $servicio->save();
+
+
+        return response()->json(['updated' => true,
+            'message' => 'Se actualizaron los datos correctamente'])
+            ->header('Content-Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');
+
     }
 
     /**

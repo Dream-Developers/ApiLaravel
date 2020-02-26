@@ -41,7 +41,8 @@ Route::post('factura','FacturasController@store')->middleware("verificar:api");
 Route::post('peticioncita', 'PeticionCitaController@store')->middleware("verificar:api");
 Route::post('cita', 'CitasController@store')->middleware("verificar:api");
 Route::get('recuperar/factura', 'FacturasController@index')->middleware("verificar:api");
-
+Route::put('actualizarFactura/{id}/update','FacturasController@update');
+Route::get("factura/{id}/mostrar","FacturasController@show");
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');
