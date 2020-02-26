@@ -59,7 +59,7 @@ class ServiciosController extends Controller
     //Jennifer
     public function Recuperar()
     {
-        $servicios = Servicio::all();
+        $servicios = Servicio::orderBy("created_at","desc")->get();
         return response()->json([
             'servicio' => $servicios]);
 
