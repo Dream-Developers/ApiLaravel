@@ -69,7 +69,7 @@ Route::post('/prueba' ,'PruebaController@prueba');
 Route::post('api/Contenido','servicioController@store');
 Route::post('servicio','ServiciosController@servicio');
 
-Route::get('recuperar','ServiciosController@Recuperar');
+Route::get('recuperar','ServiciosController@Recuperar')->middleware("verificar:api");
 Route::get('recuperar/{id}/peticionesCitas','PeticionCitaController@index');
 
 
@@ -82,11 +82,10 @@ Route::get('peticion/recuperar','PeticionCitaController@show');
 Route::get('peticion/{id}/mostrar', 'PeticionCitaController@mostrar');
 
 
-Route::put('clientes/{id}/update','UserController@update');
-Route::put('servicios/{id}/update','ServiciosController@update');
-Route::put('peticionesCitas/{id}/update','PeticionCitaController@update');
-Route::get("imagen/{id}/mostrar","ServiciosController@show");
-Route::delete('imagen/{id}/borrar', 'ServiciosController@destroy');
+Route::put('clientes/{id}/update','UserController@update')->middleware("verificar:api");
+Route::put('servicios/{id}/update','ServiciosController@update')->middleware("verificar:api");
+Route::get("imagen/{id}/mostrar","ServiciosController@show")->middleware("verificar:api");
+Route::delete('imagen/{id}/borrar', 'ServiciosController@destroy')->middleware("verificar:api");
 Route::delete('citas/{id}/borrar', 'CitasController@destroy');
 Route::delete('registro/{id}/delete','ClientesController@destroy');
 

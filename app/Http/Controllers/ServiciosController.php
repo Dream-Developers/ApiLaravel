@@ -59,7 +59,7 @@ class ServiciosController extends Controller
     //Jennifer
     public function Recuperar()
     {
-        $servicios = Servicio::all();
+        $servicios = Servicio::orderBy("created_at","desc")->get();
         return response()->json([
             'servicio' => $servicios]);
 
@@ -84,8 +84,8 @@ class ServiciosController extends Controller
         if (($request->foto) == null) {
 
             $this->validate($request, [
-                'nombre' => 'required|string',
-                'descripcion' => 'required|string',
+                'nombre' => 'required|string|max:500',
+                'descripcion' => 'required|string|max:500',
             ]);
 
 
@@ -112,8 +112,8 @@ class ServiciosController extends Controller
 
        }else{
             $this->validate($request, [
-                'nombre' => 'required|string',
-                'descripcion' => 'required|string',
+                'nombre' => 'required|string|max:500',
+                'descripcion' => 'required|string|max:500',
             ]);
 
 
