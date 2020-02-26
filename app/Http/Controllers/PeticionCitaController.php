@@ -52,34 +52,32 @@ class PeticionCitaController extends Controller
             'Hora' => 'required',
             'User_id' => 'required',
         ]);
-        $cita = new PeticionCita([
-            'Nombre' => $request->Nombre,
-            'Direccion' => $request->Direccion,
-            'Telefono' => $request->Telefono,
-            'FechaFumigacion' => $request->FechaFumigacion,
-            'Servicio' => $request->Servicio,
-            'Hora' => $request->Hora,
-            'User_id' => $request->User_id,
-            'Estado_id' => 1,
+        $cita= new PeticionCita();
 
-        ]);
-
+        $cita->Nombre=$request->Nombre;
+        $cita->Direccion=$request->Direccion;
+        $cita->Telefono= $request->Telefono;
+        $cita->FechaFumigacion= $request->FechaFumigacion;
+        $cita->Hora= $request->Hora;
+        $cita->Servicio= $request->Servicio;
+        $cita->User_id=$request->User_id;
+        $cita->Estado_id=1;
         $cita->save();
-        $user = User::findOrfail($request->User_id);
-
-        $user->notify(new FirebaseNotification("Se envio tu solicitud de cita",
-            "La cita sera aceptada por administrador de la apliacion"));
 
 
         $admin = User::where("rol_id", "=", 1)->first();
+        $data = array(
+            "id_cita" => $cita->id,
+            "body" => "Tienes una cita nueva con la siguiente informacion: " . $cita->Nombre,
+            "click_action" => "Detalle_Cita"
+        );
 
-
-        $admin->notify(new FirebaseNotification("Proxima Cita", "Tienes una cita nueva con la siguiente informacion: " . $user
-                ->name));
+        $admin->notify(new FirebaseNotification($data,"Proxima Cita", "Tienes una cita nueva con la siguiente informacion: " . $cita
+                ->Nombre));
 
 
         return response()->json([
-            'message' => 'Successfully created cita!'], 201);
+            'message' => 'Successfully created cita!'], 200);
         //
     }
 
@@ -124,6 +122,30 @@ class PeticionCitaController extends Controller
         $servicio->Estado_id = $request->input('Estado_id');
         $servicio->save();
 
+        $user = User::findOrfail( $servicio->User_id);
+        if($request->Estado_id==2){
+            $data = array(
+                "id_cita" => $servicio->id,
+                "body" => "El administrador ha aceptado tu peticion de cita puedes ver el detalle de ella.",
+                "click_action" => "Detalle_Cita"
+
+            );
+            $user->notify(new FirebaseNotification($data,"Peticion Cita","El administrador ha aceptado tu peticion de cita puedes ver el detalle de ella."));
+
+        }
+
+        if($request->Estado_id==4){
+
+            $data = array(
+                "id_cita" => $servicio->id,
+                "body" => "El administrador ha rechazado tu peticion de cita.",
+                "click_action" => "Detalle_Cita"
+
+            );
+
+            $user->notify(new FirebaseNotification($data,"Rechazo de Cita","El administrador ha rechazado tu peticion de cita."));
+
+        }
 
         return response()->json(['updated' => true,
             'message' => 'Se actualizaron los datos correctamente'])
@@ -143,7 +165,7 @@ class PeticionCitaController extends Controller
         $cita = PeticionCita::findOrFail($id);
         $cita->delete();
         return response()->json([
-            'message' => 'se borro'], 201);
+            'message' => 'se borro'], 200);
         //
     }
 

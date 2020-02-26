@@ -1,5 +1,6 @@
 <?php
 
+use App\Notifications\FirebaseNotification;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,19 @@ Route::get("/usuarios",function (){
     return response()->json(["usuarios"=>$usuarios]);
 })->middleware("verificar:api");
 
-Route::post('peticioncita', 'PeticionCitaController@store');
+Route::get('prueba',function(){
+    $user = User::where("rol_id",1)->first();
+
+    $data = array(
+        "body" => "Tienes una cita pendiente a llevar a cabo dentro de 1 hora del usuario con nombre: ' ".  "''"
+    , "click_action"=>"Detalle_Cita"
+
+    );
+
+    $user->notify(new FirebaseNotification($data,
+        "Citas Pendientes", $data));
+    return "si funciona";
+});
 Route::get('recuperar/{id}/peticionesCitas','PeticionCitaController@index')->middleware("verificar:api");
 Route::put('peticionesCitas/{id}/update','PeticionCitaController@update')->middleware("verificar:api");
 Route::post('factura','FacturasController@store')->middleware("verificar:api");
