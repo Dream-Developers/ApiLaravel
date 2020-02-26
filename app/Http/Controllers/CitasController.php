@@ -60,18 +60,6 @@ class CitasController extends Controller
 
         ]);
         $cita->save();
-        $user = User::findOrfail($request->id_usuario);
-
-        $user->notify(new FirebaseNotification("Se envio tu solicitud de cita",
-            "La cita sera aceptada por administrador de la apliacion"));
-
-        $admin = User::where("rol_id","=",1)->first();
-
-        $admin->notify(new FirebaseNotification("Proxima Cita","Tienes una cita nueva con la siguiente informacion: Nombre".$user
-        ->name));
-
-
-
 
         return response()->json([
             'message' => 'Successfully created cita!'], 201);

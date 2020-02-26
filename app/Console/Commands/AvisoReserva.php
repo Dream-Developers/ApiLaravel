@@ -50,7 +50,10 @@ class AvisoReserva extends Command
                 foreach ($citas as $item) {
 
                     $horaCita = $item->FechaProxima . "" . $item->Hora;
-                    $Hora = new \DateTime($horaCita);
+                    try {
+                        $Hora = new \DateTime($horaCita);
+                    } catch (\Exception $e) {
+                    }
 
                     $Hora->modify("-60 minutes");
 
