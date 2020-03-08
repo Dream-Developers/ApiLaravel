@@ -8,7 +8,7 @@ class Factura extends Model
 {
     Protected $fillable=[
 
-        'Nombre','Detalle','Fecha','Total'
+        'Nombre','Detalle','Fecha','Total','Descuento'
     ];
     //
 }

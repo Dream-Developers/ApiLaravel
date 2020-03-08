@@ -18,6 +18,7 @@ class CreateFacturaTable extends Migration
             $table->string('Nombre');
             $table->string('Detalle');
             $table->date('Fecha');
+            $table->integer('Descuento');
             $table->integer('Total');
             $table->timestamps();
         });

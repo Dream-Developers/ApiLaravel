@@ -40,13 +40,15 @@ class FacturasController extends Controller
     {
         $request->validate([
             'Nombre' => 'required|string||max:50',
-            'Detalle' => 'required|string',
+            'Detalle' => 'required|string||max:50',
             'Total' => 'required|numeric|max:999999999',
+            'Descuento' => 'required|numeric|max:999999999',
             'Fecha' => 'required|date',
         ]);
         $cita = new Factura([
             'Nombre' => $request->Nombre,
             'Detalle' => $request->Detalle,
+            'Descuento' => $request->Descuento,
             'Total' => $request->Total,
             'Fecha' => $request->Fecha
         ]);
@@ -96,6 +98,7 @@ class FacturasController extends Controller
         $servicio->Detalle = $request->input('Detalle');
         $servicio->Total = $request->input('Total');
         $servicio->Fecha = $request->input('Fecha');
+        $servicio->Descuento = $request->input('Descuento');
         $servicio->save();
 
 
