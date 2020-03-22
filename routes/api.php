@@ -42,7 +42,7 @@ Route::post('peticioncita', 'PeticionCitaController@store')->middleware("verific
 Route::post('cita', 'CitasController@store')->middleware("verificar:api");
 Route::get('recuperar/factura', 'FacturasController@index')->middleware("verificar:api");
 Route::put('actualizarFactura/{id}/update','FacturasController@update');
-Route::get("factura/{id}/mostrar","FacturasController@show");
+Route::get("factura/{id}/mostrar","FacturasController@show")->middleware("verificar:api");
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');
@@ -65,9 +65,9 @@ Route::group(['prefix' => 'auth'], function () {
         });
 
         Route::put("/token_firebase","UserController@actualizarTokenFirebase");
-Route::post('/prueba' ,'PruebaController@prueba');
+Route::post('/prueba' ,'PruebaController@prueba')->middleware("verificar:api");
 
-Route::post('api/Contenido','servicioController@store');
+Route::post('api/Contenido','servicioController@store')->middleware("verificar:api");
 Route::post('servicio','ServiciosController@servicio');
 
 Route::get('recuperar','ServiciosController@Recuperar')->middleware("verificar:api");
@@ -76,20 +76,20 @@ Route::get('recuperar/{id}/peticionesCitas','PeticionCitaController@index');
 
 
 
-Route::get('clientes','ClientesController@index');
-Route::get("cliente/{id}/mostrar","ClientesController@show");
-Route::get('citas','CitasController@index');
-Route::get('peticion/recuperar','PeticionCitaController@show');
-Route::get('peticion/{id}/mostrar', 'PeticionCitaController@mostrar');
+Route::get('clientes','ClientesController@index')->middleware("verificar:api");
+Route::get("cliente/{id}/mostrar","ClientesController@show")->middleware("verificar:api");
+Route::get('citas','CitasController@index')->middleware("verificar:api");
+Route::get('peticion/recuperar','PeticionCitaController@show')->middleware("verificar:api");
+Route::get('peticion/{id}/mostrar', 'PeticionCitaController@mostrar')->middleware("verificar:api");
 
 
 Route::put('clientes/{id}/update','UserController@update')->middleware("verificar:api");
 Route::put('servicios/{id}/update','ServiciosController@update')->middleware("verificar:api");
 Route::get("imagen/{id}/mostrar","ServiciosController@show")->middleware("verificar:api");
 Route::delete('imagen/{id}/borrar', 'ServiciosController@destroy')->middleware("verificar:api");
-Route::delete('citas/{id}/borrar', 'CitasController@destroy');
-Route::delete('registro/{id}/delete','ClientesController@destroy');
+Route::delete('citas/{id}/borrar', 'CitasController@destroy')->middleware("verificar:api");
+Route::delete('registro/{id}/delete','ClientesController@destroy')->middleware("verificar:api");
 
-Route::get('citas/{id}/mostrar','CitasController@show');
+Route::get('citas/{id}/mostrar','CitasController@show')->middleware("verificar:api")->middleware("verificar:api");
 
 
