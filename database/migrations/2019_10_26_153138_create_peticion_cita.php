@@ -17,11 +17,11 @@ class CreatePeticionCita extends Migration
         Schema::create('peticion_citas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('Nombre');
-            $table->string('Direccion');
+            $table->string('Direccion',500);
             $table->string('Servicio');
             $table->integer('Telefono');
             $table->date('FechaFumigacion');
-            $table->time('Hora');
+            $table->string('Hora');
             $table->unsignedInteger("Estado_id");
             $table->foreign("Estado_id")->references("id")->on("estados");
             $table->unsignedInteger("User_id");

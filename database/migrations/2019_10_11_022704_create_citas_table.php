@@ -16,7 +16,7 @@ class CreateCitasTable extends Migration
         Schema::create('citas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('Nombre');
-            $table->string('Direccion');
+            $table->string('Direccion',500);
             $table->float('Precio');
             $table->date('FechaFumigacion');
             $table->date('FechaProxima');
