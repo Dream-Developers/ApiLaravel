@@ -15,7 +15,7 @@ class FacturasController extends Controller
      */
     public function index()
     {
-        $citas = Factura::all();
+        $citas = Factura::orderBy("created_at","desc")->get();;
         return response()->json(["citas"=>$citas]);
         //
     }
