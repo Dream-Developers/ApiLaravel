@@ -15,7 +15,7 @@ class ClientesController extends Controller
     public function index()
     {
 
-        $usuarios = User::where('rol_id',"=",2)->get();
+        $usuarios = User::where('rol_id',"=",2)->orderBy("created_at","desc")->get();
         return response()->json(["clientes"=>$usuarios]);
     }
 

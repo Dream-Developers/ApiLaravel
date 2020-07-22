@@ -18,7 +18,7 @@ class CitasController extends Controller
     public function index()
     {
 
-        $citas = Cita::all();
+        $citas = Cita::orderBy("created_at","desc")->get();;
         return response()->json(["estado"=>1,"citas"=>$citas]);
     }
 

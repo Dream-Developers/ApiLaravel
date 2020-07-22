@@ -89,7 +89,7 @@ class PeticionCitaController extends Controller
      */
     public function show()
     {
-        $citas = PeticionCita::where("Estado_id", "1")->get();
+        $citas = PeticionCita::where("Estado_id", "1")->orderBy("created_at","desc")->get();
         return response()->json(["citas" => $citas])
             ->header('Content_Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');;
         //
