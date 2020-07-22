@@ -19,7 +19,7 @@ class PeticionCitaController extends Controller
      */
     public function index($id)
     {
-        $citas = PeticionCita::where("User_id", "$id")->get();
+        $citas = PeticionCita::where("User_id", "$id")->orderBy("created_at","desc")->get();
         return response()->json(["citas" => $citas])
             ->header('Content_Type', 'application/json')->header('X-Requested-With', 'XMLHttpRequest');;
         //
