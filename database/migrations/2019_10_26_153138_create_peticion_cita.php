@@ -17,7 +17,7 @@ class CreatePeticionCita extends Migration
         Schema::create('peticion_citas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('Nombre');
-            $table->string('Direccion',500);
+            $table->string('Direccion',250);
             $table->string('Servicio');
             $table->integer('Telefono');
             $table->date('FechaFumigacion');

@@ -43,7 +43,7 @@ class CitasController extends Controller
 
         $request->validate([
             'Nombre' => 'required|string|max:50',
-            'Direccion' => 'required|string',
+            'Direccion' => 'required|string|max:250',
             'Precio' => 'required|numeric|max:999999',
             'FechaFumigacion' => 'required|date',
             'FechaProxima' => 'required|date',

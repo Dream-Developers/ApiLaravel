@@ -45,7 +45,7 @@ class PeticionCitaController extends Controller
     {
         $request->validate([
             'Nombre' => 'required|string|max:50',
-            'Direccion' => 'required|string',
+            'Direccion' => 'required|string|max:250',
             'Telefono' => 'required|numeric|max:99999999|min:9999999',
             'FechaFumigacion' => 'required|date',
             'Servicio' => 'required|string',
