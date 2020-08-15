@@ -68,11 +68,11 @@ class PeticionCitaController extends Controller
         $admin = User::where("rol_id", "=", 1)->first();
         $data = array(
             "id_cita" => $cita->id,
-            "body" => "Tienes una cita nueva con la siguiente informacion: " . $cita->Nombre,
+            "body" => "Tienes una cita nueva con la siguiente información: " . $cita->Nombre,
             "click_action" => "Detalle_Cita"
         );
 
-        $admin->notify(new FirebaseNotification( "Tienes una cita nueva con la siguiente informacion: " . $cita->Nombre,"Proxima Cita", "Tienes una cita nueva con la siguiente informacion: " . $cita
+        $admin->notify(new FirebaseNotification( "Tienes una cita nueva con la siguiente información: " . $cita->Nombre,"Proxima Cita", "Tienes una cita nueva con la siguiente información: " . $cita
                 ->Nombre));
 
 
@@ -130,7 +130,7 @@ class PeticionCitaController extends Controller
                 "click_action" => "Detalle_Cita"
 
             );
-            $user->notify(new FirebaseNotification( "El administrador ha aceptado tu peticion de cita puedes ver el detalle de ella.","Peticion Cita","El administrador ha aceptado tu peticion de cita puedes ver el detalle de ella."));
+            $user->notify(new FirebaseNotification( "El administrador ha aceptado tu petición de cita puedes ver el detalle de ella.","Petición Cita","El administrador ha aceptado tu petición de cita puedes ver el detalle de ella."));
 
         }
 
@@ -138,12 +138,12 @@ class PeticionCitaController extends Controller
 
             $data = array(
                 "id_cita" => $servicio->id,
-                "body" => "El administrador ha rechazado tu peticion de cita.",
+                "body" => "El administrador ha rechazado tu petición de cita.",
                 "click_action" => "Detalle_Cita"
 
             );
 
-            $user->notify(new FirebaseNotification( "El administrador ha rechazado tu peticion de cita.","Rechazo de Cita","El administrador ha rechazado tu peticion de cita."));
+            $user->notify(new FirebaseNotification( "El administrador ha rechazado tu petición de cita.","Rechazo de Cita","El administrador ha rechazado tu petición de cita."));
 
         }
 
